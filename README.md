@@ -57,3 +57,9 @@ lib api
 ```
 yarn add axios
 ```
+
+verify variables types
+
+```
+yarn add axios
+```

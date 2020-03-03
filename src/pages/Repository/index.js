@@ -1,7 +1,21 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import Container from "../../components/Container";
 import api from "../../services/api";
+import { Loading, Owner } from "./styles";
 
 export default class Repository extends Component {
+  // shape of type Object
+  // eslint-disable-next-line react/static-property-placement
+  static propTypes = {
+    match: PropTypes.shape({
+      params: PropTypes.shape({
+        repository: PropTypes.string
+      })
+    }).isRequired
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -22,11 +36,28 @@ export default class Repository extends Component {
         per_page: 5
       })
     ]);
-    console.log(repository, "aqui foi", issues);
+    this.setState({
+      repository: repository.data,
+      issues: issues.data,
+      loading: false
+    });
   }
 
   render() {
     const { repository, issues, loading } = this.state;
-    return <div>Repository</div>;
+    if (loading) {
+      return <Loading>Carregando</Loading>;
+    }
+
+    return (
+      <Container>
+        <Link to="/">Voltar</Link>
+        <Owner>
+          <img src={repository.owner.avatar_url} alt={repository.owner.login} />
+          <h1>{repository.name}</h1>
+          <p>{repository.descriptuion}</p>
+        </Owner>
+      </Container>
+    );
   }
 }
