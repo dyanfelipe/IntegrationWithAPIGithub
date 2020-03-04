@@ -12,7 +12,8 @@ html, body, #root{
 }
 
 body{
-  background: #7159c1;
+  //background: #F0F8FF;
+  background-image: url("https://terminalroot.com.br/assets/img/cursos/git.jpg");
   -webkit-font-smoothing: antialiased !important
 }
 
